@@ -41,6 +41,7 @@ class UserLogin extends PolymerElement {
   }  
 </style>
 <app-location route={{route}}></app-location>
+<paper-button><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
 <iron-form id="form">
   <form>
     <h2> Doctor Login </h2>
