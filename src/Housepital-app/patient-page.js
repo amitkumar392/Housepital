@@ -38,7 +38,10 @@ class PatientPage extends PolymerElement {
     float:right;
   }
 
-
+paper-card{
+  height:500px;
+  width:500px;
+}
 
   header{
     background-color:white;
@@ -49,6 +52,14 @@ class PatientPage extends PolymerElement {
 <header>
 
 
+<paper-dropdown-menu label="search bases on location" id="location" on-selected-item-changed="_handleChange">
+<paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
+<template is="dom-repeat" items={{locations}}>
+<paper-item>{{item.locationName}}</paper-item>
+</template>
+</paper-listbox>
+</paper-dropdown-menu><br>
+<paper-input id="nameValue" label="search bases on name, location and speciality" on-blur="_handleChange1"></paper-input>
 <template is="dom-repeat" items={{doctors}}>
 <paper-card heading=""
   image={{item.imageUrl}}
@@ -61,14 +72,6 @@ class PatientPage extends PolymerElement {
   </div>
 </paper-card>
 </template>
-<paper-input label="search bases on name, location and speciality"></paper-input>
-<paper-dropdown-menu label="search bases on location" id="location" on-blur="_handleChange">
-<paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
-<template is="dom-repeat" items={{locations}}>
-<paper-item>{{item.locationName}}</paper-item>
-</template>
-</paper-listbox>
-</paper-dropdown-menu>
 
 
 
@@ -106,8 +109,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
                 type: Array,
                 value: []
             }, name1: {
-                type: String,
-                value: null
+                type: String
             }
         };
     }
@@ -122,12 +124,20 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     _handleSlots() {
 
     }
+    _handleChange1() {
+      this.name1 = this.$.nameValue.value;
+      for (let i = 0; i < this.locations.length; i++) {
+        if (this.locations[i].locationName == this.$.location.value) {
+            this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
+            this.action = 'Data'
+        }
+    }
+    }
+
     _handleChange() {
-
-
         for (let i = 0; i < this.locations.length; i++) {
             if (this.locations[i].locationName == this.$.location.value) {
-                this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
+                this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=`, 'get', null);
                 this.action = 'Data'
             }
         }
