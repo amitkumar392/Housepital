@@ -24,10 +24,7 @@ class UserLogin extends PolymerElement {
     border-radius:20px;
     background-color:white;
     width:40%;
-    margin: 70px auto;
-    
-  
-    
+    margin: 70px auto;  
   }
   h2{
     text-align: center;

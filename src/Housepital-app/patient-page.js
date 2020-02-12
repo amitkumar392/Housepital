@@ -5,7 +5,8 @@ import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
-
+import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/iron-icons/iron-icons.js';
 
 
 
@@ -21,11 +22,23 @@ class PatientPage extends PolymerElement {
     display: block;
     min-height:100vh;
   }
+  #form{
+    border: 1px solid red;
+    border-radius:20px;
+    background-color:white;
+    width:40%;
+    margin: 70px auto;  
+  }
+  paper-input{
+    width:400px;
+  }
+  paper-button{
+    float:right;
+  }
 </style>
+<iron-form id="form">
 <header>
-
 <paper-input label="search bases on name, location and speciality"></paper-input>
-<paper-button>Search</paper-button>
 <paper-dropdown-menu label="search bases on location">
 <paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
 <template is="dom-repeat" items={{locations}}>
@@ -34,6 +47,7 @@ class PatientPage extends PolymerElement {
 </paper-listbox>
 </paper-dropdown-menu>
 </header>
+</iron-form>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
