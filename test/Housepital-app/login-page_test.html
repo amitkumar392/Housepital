@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>user-app-app test</title>
-  
+
 
     <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
@@ -31,6 +31,7 @@
         describe(' user is login or not ', function () {
             var element;
             var elementShadowRoot;
+            var baseUrl;
 
             describe('When component is rendered', () => {
 
@@ -38,6 +39,30 @@
                     element = fixture('UserListFixture');
                     elementShadowRoot = element.shadowRoot;
                 });
+
+                it('should render the component', function () {
+                    expect(element).to.be.exist;
+                    expect(elementShadowRoot).to.be.exist;
+                });
+
+                it('should render iron-form component', function () {
+                    let ironForm = elementShadowRoot.querySelector('#form')
+                    expect(ironForm).to.be.exist;
+                    expect(ironForm).to.not.null;
+                });
+
+                it('should render phone number field', function () {
+                    let name = elementShadowRoot.querySelector('#phone')
+                    expect(name).to.be.exist;
+                    expect(name).to.not.null;
+                });
+
+                it('should render password field', function () {
+                    let sapId = elementShadowRoot.querySelector('#pass')
+                    expect(sapId).to.be.exist;
+                    expect(sapId).to.not.null;
+                });
+
 
 
                 it('Should render paper-button', function () {
@@ -63,12 +88,6 @@
 
 
 
-                    describe('when click on submit button', function () {
-                        it('should show toast', function () {
-                            let toast = elementShadowRoot.querySelector('.fit-bottom');
-                            expect(toast.getAttribute('aria-hidden')).to.be.equal('true');
-                        });
-                    });
 
 
                 });

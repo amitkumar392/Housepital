@@ -46,8 +46,8 @@ class UserLogin extends PolymerElement {
 <iron-form id="form">
   <form>
     <h2> Doctor Login </h2>
-    <paper-input label="Phone Number" allowed-pattern=[0-9] type="text" value={{phone}} name="phone"  maxlength="10" required error-message="enter phone number" ></paper-input>
-    <paper-input label="Password" type="password" value={{password}} name="password" required error-message="enter user name" ></paper-input>
+    <paper-input label="Phone Number" id="phone" allowed-pattern=[0-9] type="text" value={{phone}} name="phone"  maxlength="10" required error-message="enter phone number" ></paper-input>
+    <paper-input label="Password" id="pass" type="password" value={{password}} name="password" required error-message="enter user name" ></paper-input>
     <paper-button raised id="login" on-click="signIn">Login</paper-button>
   </form>
 </iron-form>
@@ -62,7 +62,8 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             users: Object,
             details: {
                 type: Object
-            }
+            },
+            baseUrl:String
         };
     }
     // fetching the  user data from josn file 
