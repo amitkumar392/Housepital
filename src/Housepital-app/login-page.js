@@ -72,7 +72,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let password = this.password;
             this.details = { mobile: phone, password: password }
 
-            this._makeAjax(`${baseUrl}/housepital/doctors`, 'post', this.details);
+            this._makeAjax(`${this.baseUrl}/housepital/doctors`, 'post', this.details);
 
         } else {
            
