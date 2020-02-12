@@ -81,6 +81,16 @@ class HousepitalApp extends PolymerElement {
     color: black;
     font-weight: bold;
   }
+  paper-button{
+    float:right;
+    background-color:black;
+    color:white;
+
+  }
+  a{
+    text-decoration:none;
+    color:white;
+  }
 </style>
 
 <app-location route="{{route}}">
@@ -98,9 +108,9 @@ class HousepitalApp extends PolymerElement {
       <app-toolbar>
         <div main-title="">
           <h3><iron-icon icon="maps:local-hospital"></iron-icon>Housepital
-          </h3>
-        
+          </h3>        
         </div>
+        <paper-button><a href="[[rootPath]]login">Doctor? Login</a></paper-button>
       </app-toolbar>
     </app-header>
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
