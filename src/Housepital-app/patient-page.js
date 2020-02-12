@@ -20,33 +20,20 @@ class PatientPage extends PolymerElement {
   :host {
     display: block;
     min-height:100vh;
-
-    <paper-input label="search bases on name, location and speciality"></paper-input>
-    <paper-button>Search</paper-button>
-
-    <paper-dropdown-menu label="search bases on location">
-  <paper-listbox slot="dropdown-content" class="dropdown-content">
-
-  <template is="dom-repeat" items={{}}>
-    <paper-item></paper-item>
-
-    </template>
-    
-  </paper-listbox>
-</paper-dropdown-menu>
-   
-
   }
-
- 
 </style>
 <header>
-<h1> [[prop1]]</h1>
+
+<paper-input label="search bases on name, location and speciality"></paper-input>
+<paper-button>Search</paper-button>
+<paper-dropdown-menu label="search bases on location">
+<paper-listbox slot="dropdown-content" class="dropdown-content">
+<template is="dom-repeat" items={{}}>
+<paper-item></paper-item>
+</template>
+</paper-listbox>
+</paper-dropdown-menu>
 </header>
-
-
-
-
 `;
     }
     static get properties() {
