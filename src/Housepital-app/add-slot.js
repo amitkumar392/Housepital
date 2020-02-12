@@ -11,42 +11,92 @@ import '@polymer/app-route/app-location.js';
 * @polymer
 */
 class AddSlot extends PolymerElement {
-    static get template() {
-        return html`
-<style>
-  :host {
-    display: block; 
-
+  static get template() {
+    return html`
+    <style>
+    :host {
+      display: block;
+      font-family: Comic Sans, Comic Sans MS, cursive;
+    }
+  
+    paper-button {
+      float: right;
+      background-color: black;
+      color: white;
+    }
+  
+    span {
+      margin: 10px;
+    }
+  
+    paper-card {
+      width: 1000px;
+    }
+  #form{
+    background-color:white;
+    margin-top:50px;
   }
+    #data {
+      margin: 100px;
+    }
 
+    a {
+      text-decoration: none;
+      color: white;
+    }
 </style>
-sfvsfvsfvsfvsfvsfvsfvsf
+<paper-button><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
+<paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
+<iron-form id="form">
+  <form>
+    <h2> Add Slot</h2>
+    <paper-input label="Date" id="date" type="date" ></paper-input>
+    <paper-input label="From Time" id="fromTime" type="time" value={{fromTime}} ></paper-input>
+    <paper-input label="To Time" id="time" type="time" ></paper-input>
+    <paper-button raised id="login" on-click="_handlebook">Book</paper-button>
+  </form>
+</iron-form>
+<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
+content-type="application/json" on-error="_handleError"></iron-ajax>
 
 `;
+  }
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'Forex Transfer'
+      },
+      userName: {
+        type: String,
+        value: sessionStorage.getItem('userName')
+      }, action: {
+        type: String,
+        value: 'List'
+      },
+      data: Array,
+    };
+  }
+  _handleLogout() {
+    sessionStorage.clear();
+  }
+  connectedCallback() {
+    super.connectedCallback();
+   
+  }
+
+  _handlebook() {
+    let obj = {
+      hospitalId: parseInt('1'),
+      doctorId: parseInt(sessionStorage.getItem('doctorId')),
+      date: parseInt(this.$.date.value),
+      fromTime: parseInt(this.fromTime),
+      slotToTime: parseInt(this.$.time.value)
     }
-    static get properties() {
-        return {
-            prop1: {
-                type: String,
-                value: 'Forex Transfer'
-            },
-            userName: {
-              type: String,
-              value: sessionStorage.getItem('userName')
-            }, action: {
-              type: String, 
-              value: 'List'
-            },
-            data: Array,
-        };
-    }
-    connectedCallback() {
-      super.connectedCallback();
-    let userId = sessionStorage.getItem('userId');
-    this.userName = sessionStorage.getItem('userName');
-      this._makeAjax(`http://10.117.189.177:9090/forexpay/users/${userId}/transactions`, 'get', null)
-    }
-     // calling main ajax call method 
+
+    this._makeAjax(`http://10.117.189.177:9090/forexpay/users/${sessionStorage.getItem('doctorId')}/transactions`, 'post', obj)
+  }
+  // calling main ajax call method 
   _makeAjax(url, method, postObj) {
     let ajax = this.$.ajax;
     ajax.method = method;
@@ -54,24 +104,16 @@ sfvsfvsfvsfvsfvsfvsfvsf
     ajax.body = postObj ? JSON.stringify(postObj) : undefined;
     ajax.generateRequest();
   }
-  _handleTransfer(){
-    this.set('route.path', './fund-transfer')
-  }
+
   _handleResponse(event) {
     switch (this.action) {
       case 'List':
         this.data = event.detail.response;
-        console.log(this.data)
+        this.set('route.path', './dashboard-page')
         break;
     }
   }
-    ready(){
-      super.ready();
-      let name =sessionStorage.getItem('userName');
-      if(name === null) {
-        this.set('route.path', './login-page')
-      }
-    }
+
 
 }
 
