@@ -5,18 +5,11 @@ import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
-
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
-
 import '@polymer/paper-card/paper-card.js';
 import '@polymer/polymer/lib/elements/dom-repeat';
-
 import '@polymer/paper-dialog/paper-dialog.js';
-
-
-
-
 /**
 * @customElement
 * @polymer
@@ -64,7 +57,7 @@ class PatientPage extends PolymerElement {
   {{item.consultationFees}}
   {{item.specialization}}
   <div class="card-actions">
-    <paper-button raised on-click="_handleSlots">See Slots</paper-button>
+  <paper-button raised on-click="_handleModel">Check Slot</paper-button>
   </div>
 </paper-card>
 </template>
@@ -79,11 +72,12 @@ class PatientPage extends PolymerElement {
 
 
 
-<paper-button raised on-click="_handleModel">Check Slot</paper-button>
+
 
 
 <paper-dialog id="actions" class="colored">
   <h2>Dialog Title</h2>
+
   <div>
     
 <paper-card heading="" alt="Emmental">
@@ -99,9 +93,10 @@ class PatientPage extends PolymerElement {
 
   </div>
   
+
   <div class="buttons">
-    <paper-button>More Info...</paper-button>
-    <paper-button dialog-dismiss>Decline</paper-button>
+  
+  
     <paper-button dialog-confirm autofocus>Accept</paper-button>
   </div>
 </paper-dialog>
@@ -152,7 +147,6 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
                 this.action = 'Data'
             }
         }
-
     }
         connectedCallback() {
             super.connectedCallback();
@@ -161,8 +155,6 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
         _handleModel() {
             this.$.actions.open();
         }
-
-
         // console.log("jhgf")
     
     // getting response from server and storing user name and id in session storage
