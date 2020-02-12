@@ -20,7 +20,7 @@ class UserLogin extends PolymerElement {
 
   #form {
     margin:70px 0px 0px 400px;
-    border: 1px solid black;
+    border: 1px solid red;
     background-color:white;
     width: 500px;
     padding:10px;
@@ -43,7 +43,7 @@ class UserLogin extends PolymerElement {
 <app-location route={{route}}></app-location>
 <iron-form id="form">
   <form>
-    <h2> Login Page </h2>
+    <h2> Doctor Login </h2>
     <paper-input label="Phone Number" allowed-pattern=[0-9] type="text" value={{phone}} name="phone"  maxlength="10" required error-message="enter phone number" ></paper-input>
     <paper-input label="Password" type="password" value={{password}} name="password" required error-message="enter user name" ></paper-input>
     <paper-button raised id="login" on-click="signIn">Login</paper-button>
@@ -84,6 +84,9 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
         this.users = event.detail.response
+       sessionStorage.setItem('doctorName',this.users.doctorName);
+       sessionStorage.setItem('doctorId',this.users.doctorId);
+       this.set('route.path','./dashboard-page')
     }
       // calling main ajax call method 
     _makeAjax(url, method, postObj) {

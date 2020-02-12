@@ -10,7 +10,7 @@ import '@polymer/app-route/app-location.js';
 * @customElement
 * @polymer
 */
-class Dashboard extends PolymerElement {
+class AddSlot extends PolymerElement {
     static get template() {
         return html`
 <style>
@@ -18,17 +18,10 @@ class Dashboard extends PolymerElement {
     display: block; 
 
   }
-  paper-button{
-    float:right;
-    background-color:black;
-    color:white;
-  }
 
 </style>
-<div id="buttons">
-<paper-button>Add Slot</paper-button>
-<paper-button>Logout</paper-button>
-</div>
+sfvsfvsfvsfvsfvsfvsfvsf
+
 `;
     }
     static get properties() {
@@ -82,4 +75,4 @@ class Dashboard extends PolymerElement {
 
 }
 
-window.customElements.define('dashboard-page', Dashboard);
+window.customElements.define('add-slot', AddSlot);

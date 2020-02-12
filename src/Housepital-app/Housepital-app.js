@@ -39,7 +39,7 @@ class HousepitalApp extends PolymerElement {
     return html`
 <style>
   :host {
-    --app-primary-color: #ff7a22;
+    --app-primary-color: rgb(255, 0, 0);
     --app-secondary-color: black;
     font-family: Comic Sans, Comic Sans MS, cursive;
     display: block;
@@ -96,12 +96,14 @@ class HousepitalApp extends PolymerElement {
         <div main-title="">
           <h3><iron-icon icon="maps:local-hospital"></iron-icon>Housepital
           </h3>
+        
         </div>
       </app-toolbar>
     </app-header>
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-page name="login"></login-page>
       <dashboard-page name="dashboard-page"></dashboard-page>
+      <add-slot name="add-slot"></add-slot>
       </iron-pages>
   </app-header-layout>
 </app-drawer-layout>
@@ -148,10 +150,13 @@ class HousepitalApp extends PolymerElement {
       case 'login':
         import('./login-page.js');
         break;
-        case 'dashboard-page':
-          import('./dashboard-page.js');
-          break;
-     
+      case 'dashboard-page':
+        import('./dashboard-page.js');
+        break;
+      case 'add-slot':
+        import('./add-slot.js');
+        break;
+
     }
   }
 }
