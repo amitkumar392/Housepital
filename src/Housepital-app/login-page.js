@@ -57,7 +57,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     }
     static get properties() {
         return {
-            users: Array,
+            users: Object,
             details: {
                 type: Object
             }
@@ -70,7 +70,8 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let phone = this.phone;
             let password = this.password;
             this.details = { mobile: phone, password: password }
-            this._makeAjax(`http://10.117.189.37:9090/housepital/doctors`, 'post', this.details);
+            console.log(this.details);
+            this._makeAjax(`http://10.117.189.37:9090//housepital/doctors`, 'post', this.details);
         } else {
            
         }
@@ -84,6 +85,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
         this.users = event.detail.response
+        console.log(this.users);
     }
       // calling main ajax call method 
     _makeAjax(url, method, postObj) {
