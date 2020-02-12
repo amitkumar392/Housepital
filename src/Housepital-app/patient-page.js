@@ -131,7 +131,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     }
     connectedCallback() {
         super.connectedCallback();
-        this._makeAjax(`${baseUrl1}/housepital/locations`, 'get', null);
+        this._makeAjax(`http://10.117.189.177:9090/housepital/locations`, 'get', null);
     }
     // handling error if encounter error from backend server
     _handleError() {
@@ -144,7 +144,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
       this.name1 = this.$.nameValue.value;
       for (let i = 0; i < this.locations.length; i++) {
         if (this.locations[i].locationName == this.$.location.value) {
-            this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
+            this._makeAjax(`http://10.117.189.177:9090/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
             this.action = 'Data'
         }
     }
@@ -153,14 +153,14 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     _handleChange() {
         for (let i = 0; i < this.locations.length; i++) {
             if (this.locations[i].locationName == this.$.location.value) {
-                this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=`, 'get', null);
+                this._makeAjax(`http://10.117.189.177:9090/housepital/locations/${this.locations[i].locationId}/doctors?name=`, 'get', null);
                 this.action = 'Data'
             }
         }
     }
         connectedCallback() {
             super.connectedCallback();
-            this._makeAjax(`${baseUrl1}/housepital/locations`, 'get', null);
+            this._makeAjax(`http://10.117.189.177:9090/housepital/locations`, 'get', null);
         }
         _handleModel() {
             this.$.actions.open();

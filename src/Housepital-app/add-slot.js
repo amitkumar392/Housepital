@@ -20,7 +20,19 @@ class AddSlot extends PolymerElement {
   }
 
 </style>
-sfvsfvsfvsfvsfvsfvsfvsf
+<iron-form id="form">
+  <form>
+    <h2> Add Slot</h2>
+    <paper-input label="Phone Number" id="phone" allowed-pattern=[0-9] type="text" value={{phone}} name="phone"  maxlength="10" required error-message="enter phone number" ></paper-input>
+    <paper-input label="Password" id="pass" type="password" value={{password}} name="password" required error-message="enter user name" ></paper-input>
+    <paper-button raised id="login" on-click="signIn">Login</paper-button>
+  </form>
+</iron-form>
+hospitalId:Integer,
+doctorId:Long,
+date:LocalDate,
+fromTime: String,
+slotToTime:String
 
 `;
     }
