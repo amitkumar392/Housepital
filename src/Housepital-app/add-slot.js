@@ -5,6 +5,7 @@ import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/app-route/app-location.js';
+import '@polymer/paper-toast/paper-toast.js';
 
 /**
 * @customElement
@@ -59,7 +60,7 @@ class AddSlot extends PolymerElement {
 </iron-form>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
-
+<paper-toast text="Slot Added" id="slot"></paper-toast>
 
 `;
   }
@@ -111,6 +112,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     switch (this.action) {
       case 'List':
         this.data = event.detail.response;
+        this.$.slot.open()
         this.set('route.path', './dashboard-page')
         break;
     }

@@ -5,6 +5,8 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-toast/paper-toast.js';
 import '@polymer/app-route/app-location.js';
+import '@polymer/paper-toast/paper-toast.js';
+
 /**
 * @customElement
 * @polymer
@@ -52,6 +54,8 @@ class FormPage extends PolymerElement {
 </iron-form>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
+<paper-toast text="Booked" id="slot"></paper-toast>
+
 `;
     }
     static get properties() {
@@ -80,7 +84,8 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     }
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
-        this.users = event.detail.response
+        this.users = event.detail.response;
+        this.$.slot.open();
       this.setProperties('route.path','./patient-page')
     }
       // calling main ajax call method 

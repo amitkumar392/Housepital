@@ -112,6 +112,7 @@ class HousepitalApp extends PolymerElement {
         </div>
         <template is="dom-if" if={{login}}>
         <paper-button><a href="[[rootPath]]login">Doctor? Login</a></paper-button>
+        <paper-button><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
 </template>
       </app-toolbar>
     </app-header>
