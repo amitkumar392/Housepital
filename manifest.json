@@ -1,0 +1,6 @@
+{
+  "name": "Housepital",
+  "short_name": "Housepital",
+  "start_url": "/",
+  "display": "standalone"
+}
