@@ -5,8 +5,13 @@ import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
+
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+
+import '@polymer/paper-card/paper-card.js';
+import '@polymer/polymer/lib/elements/dom-repeat';
+
 
 
 
@@ -38,6 +43,28 @@ class PatientPage extends PolymerElement {
 </style>
 <iron-form id="form">
 <header>
+</header>
+<paper-input label="search bases on name, location and speciality"></paper-input>
+<paper-button>Search</paper-button>
+<paper-dropdown-menu label="search bases on location">
+<paper-listbox slot="dropdown-content" class="dropdown-content">
+<template is="dom-repeat" items={{}}>
+<paper-item></paper-item>
+</template>
+</paper-listbox>
+</paper-dropdown-menu>
+<template is="dom-repeat" items={{}}>
+<paper-card heading=""
+  image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  alt="Go Nature">
+  <h2>{{item.vendorName}}<span>Ratings: {{item.rating}} <iron-icon icon="star"></iron-icon></span></h2>
+  
+  <div class="card-actions">
+    <paper-button raised on-click="_handleBuy">go to hell</paper-button>
+  </div>
+</paper-card>
+</template>
+
 <paper-input label="search bases on name, location and speciality"></paper-input>
 <paper-dropdown-menu label="search bases on location">
 <paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>user-app-app test</title>
+  
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script type="module" src="../../src/Housepital-app/login-page.js"></script>
+</head>
+
+<body>
+
+    <test-fixture id="UserListFixture">
+        <template>
+            <login-page></login-page>
+        </template>
+    </test-fixture>
+
+
+
+    <script>
+        describe(' user is login or not ', function () {
+            var element;
+            var elementShadowRoot;
+
+            describe('When component is rendered', () => {
+
+                beforeEach(function () {
+                    element = fixture('UserListFixture');
+                    elementShadowRoot = element.shadowRoot;
+                });
+
+
+                it('Should render paper-button', function () {
+                    var paperButton = elementShadowRoot.querySelector('paper-button');
+                    expect(paperButton.innerText).to.equal(('LOGIN'));
+                });
+
+
+
+                it('Should render iron-ajax', function () {
+                    let ironAjax = elementShadowRoot.querySelector('iron-ajax');
+                    expect(ironAjax).to.exist;
+                });
+
+
+
+                describe('when login button is triggered click event', function () {
+                    let loginBtn;
+                    beforeEach(function () {
+                        loginBtn = elementShadowRoot.querySelector('#login');
+                        loginBtn.click();
+                    });
+
+
+
+                    describe('when click on submit button', function () {
+                        it('should show toast', function () {
+                            let toast = elementShadowRoot.querySelector('.fit-bottom');
+                            expect(toast.getAttribute('aria-hidden')).to.be.equal('true');
+                        });
+                    });
+
+
+                });
+
+
+            });
+
+        });
+    </script>
+
+
+</body>
+
+</html>
