@@ -150,7 +150,7 @@ class HousepitalApp extends PolymerElement {
   * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
   */
   _routePageChanged(page) {
-    this.page = page || 'login';
+    this.page = page || 'patient-page';
   }
 
   /**

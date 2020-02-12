@@ -1,7 +1,7 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
-
+import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
@@ -23,12 +23,7 @@ class PatientPage extends PolymerElement {
   :host {
     display: block;
     min-height:100vh;
-
-   
-
   }
-
- 
 </style>
 <header>
 <h1> [[prop1]]</h1>
@@ -62,37 +57,40 @@ class PatientPage extends PolymerElement {
 </paper-card>
 </template>
 
-
-
-
+<paper-input label="search bases on name, location and speciality"></paper-input>
+<paper-button>Search</paper-button>
+<paper-dropdown-menu label="search bases on location">
+<paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
+<template is="dom-repeat" items={{locations}}>
+<paper-item>{{item.locationName}}</paper-item>
+</template>
+</paper-listbox>
+</paper-dropdown-menu>
+</header>
+<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
+content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
     }
     static get properties() {
         return {
-            prop1: {
-                type: String,
-                value: 'The Patient Page'
+            locations:{
+              type:Array,
+              value:[]
             }
         };
     }
-
-
     connectedCallback(){
         super.connectedCallback();
-        this._makeAjax(`http://10.117.189.37:9090//housepital/doctors`, 'post', this.details);
+        this._makeAjax(`${baseUrl1}/housepital/locations`, 'get', null);
     }
-
      // handling error if encounter error from backend server
      _handleError() {
         
     }
-
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
-        this.users = event.detail.response
-       sessionStorage.setItem('doctorName',this.users.doctorName);
-       sessionStorage.setItem('doctorId',this.users.doctorId);
-       this.set('route.path','./dashboard-page')
+        this.locations = event.detail.response
+      console.log(this.users)
     }
       // calling main ajax call method 
     _makeAjax(url, method, postObj) {
