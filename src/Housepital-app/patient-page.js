@@ -33,10 +33,13 @@ class PatientPage extends PolymerElement {
   paper-button{
     float:right;
   }
+  header{
+    background-color:white;
+  }
 </style>
 <iron-form id="form">
 <header>
-</header>
+
 
 <template is="dom-repeat" items={{doctors}}>
 <paper-card heading=""
@@ -91,16 +94,16 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
 
   }
   _handleSlots(){
-    
+
   }
   _handleChange() {
   
-    for (let i = 0; i < this.locations.length; i++) {
-      if (this.locations[i].locationName == this.$.location.value) {
-        this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
-      this.action='Data'
-      }
-    }
+    // for (let i = 0; i < this.locations.length; i++) {
+    //   if (this.locations[i].locationName == this.$.location.value) {
+    //     this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
+    //   this.action='Data'
+    //   }
+    // }
     // console.log("jhgf")
   }
   // getting response from server and storing user name and id in session storage
