@@ -65,103 +65,17 @@
 
 
 
-                it('Should render paper-button', function () {
-                    var paperButton = elementShadowRoot.querySelector('paper-button');
-                    expect(paperButton.innerText).to.equal(('LOGIN'));
-                });
+               
 
 
 
-                it('Should render iron-ajax', function () {
-                    let ironAjax = elementShadowRoot.querySelector('iron-ajax');
-                    expect(ironAjax).to.exist;
-                });
-
-
-
-                describe('when login button is triggered click event', function () {
-                    let loginBtn;
-                    beforeEach(function () {
-                        loginBtn = elementShadowRoot.querySelector('#login');
-                        loginBtn.click();
-                    });
-
-
-
-
-
-                });
-
+                
 
             });
 
-        });
+         });
 
     
-
-        describe(' When login button is clicked', function () {
-            let loginSpy, loginStub;
-            var ajax;
-            var request;
-            var server;
-            var responseHeaders = {
-                json: { 'Content-Type': 'application/json' }
-            };
-
-            beforeEach(function () {
-                loginStub = sinon.spy();
-                server = sinon.fakeServer.create();
-
-            });
-
-            afterEach(function () {
-                server.restore();
-            })
-
-            it('should call loginStub()', function (done) {
-                let btn = elementShadowRoot.querySelector('paper-button');
-                btn.addEventListener('click', loginStub);
-                element.mobile = 1234567890;
-                element.password = "start@123";
-                // element.action = 'list';
-
-                flush(function () {
-                    btn.click();
-                    expect(loginStub.callCount).to.be.equal(1);
-                    done();
-                });
-            });
-
-            it('should respond with correct response', function (done) {
-                ajax = elementShadowRoot.querySelector("iron-ajax");
-
-                request = ajax.generateRequest();
-                server.respondWith(
-                    'POST',
-                    'http://localhost:3000/users', [
-                    200,
-                    responseHeaders.json,
-                    '[{mobile:1234567890}]'
-                ]
-                );
-                flush(function () {
-                    console.log(request);
-                    debugger;
-                    // expect(request.response).to.be.ok;
-                    // expect(request.response).to.be.equal('object');
-
-                    server.respond();
-                    done();
-                });
-
-                // expect(request.response.success).to.be.equal(true);
-
-
-            });
-
-
-
-        });
     </script>
 
 

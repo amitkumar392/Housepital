@@ -45,7 +45,8 @@ class AddSlot extends PolymerElement {
       color: white;
     }
 </style>
-<paper-button><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
+
+<paper-button><a href="[[rootPath]]dashboard-page">Dashboard</a></paper-button>
 <paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
 <iron-form id="form">
   <form>
@@ -58,6 +59,7 @@ class AddSlot extends PolymerElement {
 </iron-form>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
+
 
 `;
   }

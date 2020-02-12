@@ -112,7 +112,8 @@ paper-dropdown-menu{
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
-  }
+
+}
   static get properties() {
     return {
       locations: {
@@ -142,6 +143,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
   // handling error if encounter error from backend server
   _handleError() {
 
+
   }
   _handleChange1() {
     this.name1 = this.$.nameValue.value;
@@ -152,7 +154,9 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     
   }
 
+
   _handleChange() {
+
 
     
         this._makeAjax(`${baseUrl1}/housepital/locations/1/doctors?name=${this.name1}`, 'get', null);

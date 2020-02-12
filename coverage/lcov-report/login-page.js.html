@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.65% </span>
+                <span class="strong">16.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>3/18</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.65% </span>
+                <span class="strong">16.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>3/18</span>
             </div>
         
             
@@ -161,8 +161,7 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,17 +174,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,7 +211,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,6 +253,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -268,7 +266,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-form/iron-form.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
@@ -294,10 +292,8 @@ class UserLogin extends PolymerElement {
     border-radius:20px;
     background-color:white;
     width:40%;
-    margin: 70px auto;
-    
-  
-    
+  padding:20px;
+    margin: 70px auto;  
   }
   h2{
     text-align: center;
@@ -344,7 +340,7 @@ content-type="application/json" on-error="_handleError"&gt;&lt;/iron-ajax&gt;
             let password = <span class="cstat-no" title="statement not covered" >this.password;</span>
 <span class="cstat-no" title="statement not covered" >            this.details = { mobile: phone, password: password }</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            this._makeAjax(`${baseUrl}/housepital/doctors`, 'post', this.details);</span>
+<span class="cstat-no" title="statement not covered" >            this._makeAjax(`${this.baseUrl}/housepital/doctors`, 'post', this.details);</span>
 &nbsp;
         } else {
            
@@ -361,6 +357,7 @@ content-type="application/json" on-error="_handleError"&gt;&lt;/iron-ajax&gt;
 <span class="cstat-no" title="statement not covered" >        this.users = event.detail.response</span>
 <span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('doctorName',this.users.doctorName);</span>
 <span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('doctorId',this.users.doctorId);</span>
+<span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('login',false);</span>
 <span class="cstat-no" title="statement not covered" >       this.set('route.path','./dashboard-page')</span>
     }
       // calling main ajax call method 
@@ -381,7 +378,7 @@ window.customElements.define('login-page', UserLogin);</pre></td></tr></table></
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Feb 12 2020 17:05:05 GMT+0530 (India Standard Time)
+                at Wed Feb 12 2020 19:54:51 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
