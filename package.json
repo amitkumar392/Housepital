@@ -1,6 +1,7 @@
 {
   "name": "housepital-app",
   "dependencies": {
+    "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
     "@polymer/iron-ajax": "^3.0.1",
     "@polymer/iron-form": "^3.0.1",

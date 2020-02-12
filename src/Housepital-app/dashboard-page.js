@@ -16,96 +16,11 @@ class Dashboard extends PolymerElement {
 <style>
   :host {
     display: block; 
-    height:100vh;
-    background: linear-gradient(to right, #A5CC82, #00467F); 
 
   }
-  table, td, th {  
-    border: 1px solid rgb(0, 0, 0);
-    text-align: left;
-    border-style: dashed;
-  }
-  
-  table {
-    border-collapse: collapse;
-    margin-top:50px;
-    width: 90%;
-  }
-  
-  th, td {
-    padding: 15px;
-  }
-  #form {
-    border: 2px solid black;
-    width: 500px;
-    margin-left: 400px;
-  }
-  form {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  h2{
-    text-align: center;
-  }
-  #buttons{
-    position:absolute;
-    top:50px;
-    left:1000px;
-  }
-  h2{
-    text-align:center;
-    color:white;
-    position:absolute;
-    top:22px;
-    left:300px;
-}
-  paper-button {
-    text-align: center;
-    background-color:black;
-    color:white;
-  }
-  h1{
-      text-align:center;
-      padding-bottom:20px;
-      padding-top:20px;
-  }
-  a{
-    text-decoration:none;
-    color:white;
-  }
+
 </style>
-<app-location route={{route}}></app-location>
-<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
-content-type="application/json" on-error="_handleError"></iron-ajax>
-<h2>Welcome, {{userName}}</h2>
-<div id="buttons">
-<paper-button raised class="custom indigo" id="transfer" on-click="_handleTransfer">Transfer</paper-button>
-<paper-button raised class="custom indigo" on-click="_handleLogout"><a name="login-page" href="[[rootPath]]login-page">Logout</a></paper-button>
-</div>
-<h1>Transaction History</h1>
-<table>
-  <tr>
-    <th>To Account</th>
-    <th>From Account</th>
-    <th>Type</th>
-    <th>Date</th>
-    <th>Amount</th>
-    <th>Balance</th>
-    <th>Currency</th>
-    <th>Status</th>
-    </tr>
-    <template is="dom-repeat" items={{data}}>
-  <tr>
-    <td>{{data.sourceAccountNumber}}</td>
-    <td>{{data.destinationAccountNumber}}</td>
-    <td>{{data.transactionType}}}}</td>
-    <td>{{data.transactionDate}}}}</td>
-    <td>{{data.transactionAmount}}}}</td>
-    <td>{{data.availableBalance}}}}</td>
-    <td>{{data.currency}}}}</td>
-    <td>{{data.status}}}}</td>
-  </tr>
-  </template>
+sdfsdfdf
 </table>
 `;
     }

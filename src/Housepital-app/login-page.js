@@ -1,12 +1,10 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
-
 import '@polymer/iron-form/iron-form.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-toast/paper-toast.js';
 import '@polymer/app-route/app-location.js';
-
 /**
 * @customElement
 * @polymer
@@ -17,9 +15,6 @@ class UserLogin extends PolymerElement {
 <style>
   :host {
     display: block;
-    min-height:100vh;
-   background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);    
-
   }
 
   #form {
@@ -50,7 +45,7 @@ class UserLogin extends PolymerElement {
       padding-bottom:10px;
       padding-top:10px;
       margin-bottom:50px;
-     background: linear-gradient(to right, #A5CC82, #00467F); 
+   
 
   }
   #blankForm {
