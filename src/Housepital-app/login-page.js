@@ -70,7 +70,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let phone = this.phone;
             let password = this.password;
             this.details = { mobile: phone, password: password }
-            this._makeAjax(`http://10.117.189.37:9090/housepital/doctors`, 'post', this.details);
+            this._makeAjax(`${baseUrl}/housepital/doctors`, 'post', this.details);
         } else {
            
         }

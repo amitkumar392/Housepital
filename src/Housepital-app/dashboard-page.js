@@ -23,12 +23,20 @@ class Dashboard extends PolymerElement {
     background-color:black;
     color:white;
   }
+  #buttons{
 
+  }
+a{
+  text-decoration:none;
+  color:white;
+}
 </style>
 <div id="buttons">
-<paper-button>Add Slot</paper-button>
-<paper-button>Logout</paper-button>
+<paper-button><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
+<paper-button><a href="[[rootPath]]login">Logout</a></paper-button>
 </div>
+<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
+content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
     }
     static get properties() {
@@ -51,7 +59,7 @@ class Dashboard extends PolymerElement {
       super.connectedCallback();
     let userId = sessionStorage.getItem('userId');
     this.userName = sessionStorage.getItem('userName');
-      this._makeAjax(`http://10.117.189.177:9090/forexpay/users/${userId}/transactions`, 'get', null)
+      this._makeAjax(`${this.baseURI}/housepital/doctors/{doctorId}/appointments`, 'get', null)
     }
      // calling main ajax call method 
   _makeAjax(url, method, postObj) {
