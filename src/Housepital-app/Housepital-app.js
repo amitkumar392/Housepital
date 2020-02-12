@@ -106,6 +106,7 @@ class HousepitalApp extends PolymerElement {
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-page name="login"></login-page>
       <dashboard-page name="dashboard-page"></dashboard-page>
+      <patient-page name="patient-page"></patient-page>
       <add-slot name="add-slot"></add-slot>
       </iron-pages>
   </app-header-layout>
@@ -158,6 +159,9 @@ class HousepitalApp extends PolymerElement {
         break;
       case 'add-slot':
         import('./add-slot.js');
+        break;
+      case 'patient-page':
+        import('./patient-page.js');
         break;
 
     }
