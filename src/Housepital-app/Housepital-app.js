@@ -120,6 +120,7 @@ class HousepitalApp extends PolymerElement {
       <dashboard-page name="dashboard-page"></dashboard-page>
       <patient-page name="patient-page"></patient-page>
       <add-slot name="add-slot"></add-slot>
+      <form-page name="form-page"></form-page>
       </iron-pages>
   </app-header-layout>
 </app-drawer-layout>
@@ -133,7 +134,7 @@ class HousepitalApp extends PolymerElement {
         reflectToAttribute: true,
         observer: '_pageChanged'
       },
-       login: {
+      login: {
         type: Boolean,
         value: true
       },
@@ -178,6 +179,9 @@ class HousepitalApp extends PolymerElement {
         break;
       case 'patient-page':
         import('./patient-page.js');
+        break;
+      case 'form-page':
+        import('./form-page.js');
         break;
 
     }

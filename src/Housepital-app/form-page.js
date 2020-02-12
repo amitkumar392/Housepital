@@ -9,7 +9,7 @@ import '@polymer/app-route/app-location.js';
 * @customElement
 * @polymer
 */
-class UserLogin extends PolymerElement {
+class FormPage extends PolymerElement {
     static get template() {
         return html`
 <style>
@@ -42,15 +42,14 @@ class UserLogin extends PolymerElement {
 </style>
 <app-location route={{route}}></app-location>
 <iron-form id="form">
-  <form>
-    <h2> Doctor Login </h2>
-    <paper-input label="Phone Number" id="phone" allowed-pattern=[0-9] type="text" value={{phone}} name="phone"  maxlength="10" required error-message="enter phone number" ></paper-input>
-    <paper-input label="Password" id="pass" type="password" value={{password}} name="password" required error-message="enter user name" ></paper-input>
-    <paper-button raised id="login" on-click="signIn">Login</paper-button>
-  </form>
+<form>
+<h2>Your Details</h2>
+<paper-input label="Name" id="name" type="text" ></paper-input>
+<paper-input label="Email" id="email" type="email" ></paper-input>
+<paper-input label="Phone" id="phone" type="phone"></paper-input>
+<paper-button raised id="book" on-click="_handleBook">Book</paper-button>
+</form>
 </iron-form>
-<paper-toast text="Please Enter All Details"  class="fit-bottom" id="blankForm"></paper-toast>
-<paper-toast text="Wrong Credentials"  class="fit-bottom" id="wrongCredentials"></paper-toast>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
@@ -64,34 +63,25 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             baseUrl:String
         };
     }
-    // fetching the  user data from josn file 
-    signIn() {
-
-        if (this.$.form.validate()) {
-            let phone = this.phone;
-            let password = this.password;
-            this.details = { mobile: phone, password: password }
-            this.$.form.reset();
-            this._makeAjax(`${baseUrl1}/housepital/doctors`, 'post', this.details);
-
-        } else {
-           
-        }
-    }
-
+   
     // handling error if encounter error from backend server
     _handleError() {
         
     }
-
+    _handleBook(){
+        let obj={
+            doctorSlotId:parseInt(sessionStorage.getItem('slot')),
+            patientName:this.$.name.value,
+            emailId:this.$.email.value,
+            mobile:parseInt(this.$.phone.value),
+        }
+        console.log(obj)
+        this._makeAjax(`${baseUrl1}/housepital/patients`, 'post',obj);
+    }
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
         this.users = event.detail.response
-        console.log(this.users)
-       sessionStorage.setItem('doctorName',this.users.doctorName);
-       sessionStorage.setItem('doctorId',this.users.doctorId);
-       sessionStorage.setItem('login',false);
-       this.set('route.path','./dashboard-page')
+      this.setProperties('route.path','./patient-page')
     }
       // calling main ajax call method 
     _makeAjax(url, method, postObj) {
@@ -104,4 +94,4 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
 
 }
 
-window.customElements.define('login-page', UserLogin);
+window.customElements.define('form-page', FormPage);
