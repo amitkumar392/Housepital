@@ -24,6 +24,7 @@ class UserLogin extends PolymerElement {
     border-radius:20px;
     background-color:white;
     width:40%;
+  padding:20px;
     margin: 70px auto;  
   }
   h2{
@@ -88,6 +89,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
         this.users = event.detail.response
        sessionStorage.setItem('doctorName',this.users.doctorName);
        sessionStorage.setItem('doctorId',this.users.doctorId);
+       sessionStorage.setItem('login',false);
        this.set('route.path','./dashboard-page')
     }
       // calling main ajax call method 

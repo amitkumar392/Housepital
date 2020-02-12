@@ -110,7 +110,9 @@ class HousepitalApp extends PolymerElement {
           <h3><iron-icon icon="maps:local-hospital"></iron-icon>Housepital
           </h3>        
         </div>
+        <template is="dom-if" if={{login}}>
         <paper-button><a href="[[rootPath]]login">Doctor? Login</a></paper-button>
+</template>
       </app-toolbar>
     </app-header>
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
@@ -130,6 +132,10 @@ class HousepitalApp extends PolymerElement {
         type: String,
         reflectToAttribute: true,
         observer: '_pageChanged'
+      },
+       login: {
+        type: Boolean,
+        value: true
       },
       routeData: Object,
       subroute: Object,
