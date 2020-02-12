@@ -33,6 +33,9 @@ class PatientPage extends PolymerElement {
 
   paper-input{
     width:400px;
+    position:relative;
+    left:250px;
+    top:-60px;
   }
   paper-button{
     float:right;
@@ -41,6 +44,13 @@ class PatientPage extends PolymerElement {
 paper-card{
   height:500px;
   width:500px;
+}
+#slot{
+  height:70px;
+  width:500px;
+}
+paper-dropdown-menu{
+  margin:bottom
 }
 
   header{
@@ -52,13 +62,13 @@ paper-card{
 <header>
 
 
-<paper-dropdown-menu label="search bases on location" id="location" on-selected-item-changed="_handleChange">
+<paper-dropdown-menu label="search bases on location" id="location" on-value-changed="_handleChange" >
 <paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
 <template is="dom-repeat" items={{locations}}>
 <paper-item>{{item.locationName}}</paper-item>
 </template>
 </paper-listbox>
-</paper-dropdown-menu><br>
+</paper-dropdown-menu>
 <paper-input id="nameValue" label="search bases on name, location and speciality" on-blur="_handleChange1"></paper-input>
 <template is="dom-repeat" items={{doctors}}>
 <paper-card heading=""
@@ -72,40 +82,25 @@ paper-card{
   </div>
 </paper-card>
 </template>
-
-
-
-
-
-
 <paper-dialog id="actions" class="colored">
-  <h2>Dialog Title</h2>
-
-  <div>
-    
-<paper-card heading="" alt="Emmental">
+  <h2>Available Slots</h2>
+  <div>   
+<paper-card heading="" alt="Emmental" id="slot">
 <div class="card-content">
-  Emmentaler or Emmental is a yellow, medium-hard cheese that originated in the area around Emmental, Switzerland. It is one of the cheeses of Switzerland, and is sometimes known as Swiss cheese.
-</div>
+{{item.date:LocalDate}}
+{{item.slotTime:LocalTime}}
+{{item.hospitalId:Integer}}
+{{item.hospitalName}}
+{{item.doctorSlotId}}
+ </div>
 <div class="card-actions">
-  <paper-button>Share</paper-button>
-  <paper-button>Explore!</paper-button>
+  <paper-button>Book This Slot</paper-button>
 </div>
 </paper-card>
-
-
   </div>
-  
-
   <div class="buttons">
-  
-  
-    <paper-button dialog-confirm autofocus>Accept</paper-button>
   </div>
 </paper-dialog>
-
-
-
 </header>
 </iron-form>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
@@ -125,8 +120,12 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
                 type: Array,
                 value: []
             }, name1: {
-                type: String
-            }
+                type: String,
+                value:''
+            }, slots: {
+              type: Array,
+              value: []
+          }
         };
     }
     connectedCallback() {
@@ -153,7 +152,8 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     _handleChange() {
         for (let i = 0; i < this.locations.length; i++) {
             if (this.locations[i].locationName == this.$.location.value) {
-                this._makeAjax(`http://10.117.189.177:9090/housepital/locations/${this.locations[i].locationId}/doctors?name=`, 'get', null);
+
+                this._makeAjax(`${baseUrl1}/housepital/locations/${this.locations[i].locationId}/doctors?name=${this.name1}`, 'get', null);
                 this.action = 'Data'
             }
         }
@@ -162,8 +162,11 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             super.connectedCallback();
             this._makeAjax(`http://10.117.189.177:9090/housepital/locations`, 'get', null);
         }
-        _handleModel() {
+        _handleModel(event) {
             this.$.actions.open();
+            let id = event.model.doctorId;
+            this._makeAjax(`${baseUrl1}/houspital/doctors/${id}/availabilities`, 'get', null);
+            this.action = 'Slots'
         }
         // console.log("jhgf")
     
@@ -176,6 +179,9 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             case 'List':
                 this.locations = event.detail.response;
                 break;
+                case 'Slots':
+                  this.slots = event.detail.response;
+                  break;
         }
     }
     // calling main ajax call method 
