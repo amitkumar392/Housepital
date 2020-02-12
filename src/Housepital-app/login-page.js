@@ -18,27 +18,36 @@ class UserLogin extends PolymerElement {
     font-family: Comic Sans, Comic Sans MS, cursive;
   }
 
-  #form {
-    margin:70px 0px 0px 400px;
-    border: 1px solid red;
-    background-color:white;
-    width: 500px;
-    padding:10px;
-    border-radius:20px;
+  // #form {
+  //   margin:70px 0px 0px 400px;
+  //   border: 1px solid red;
+  //   background-color:white;
+  //   width: 500px;
+  //   padding:10px;
+  //   border-radius:20px;
   
+  // }
+  #form{
+    border: 1px solid red;
+    border-radius:20px;
+    background-color:white;
+    width:30%
+    
+  
+    
   }
   h2{
     text-align: center;
     
   }
-  paper-button {
-    text-align: center;
-    margin-top: 40px;
-    background-color:black;
-    color:white;
-    margin-bottom: 40px;
-    margin-left: 180px;
-  }  
+  // paper-button {
+  //   text-align: center;
+  //   margin-top: 40px;
+  //   background-color:black;
+  //   color:white;
+  //   margin-bottom: 40px;
+  //   margin-left: 180px;
+  // }  
 </style>
 <app-location route={{route}}></app-location>
 <iron-form id="form">
@@ -57,7 +66,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     }
     static get properties() {
         return {
-            users: Array,
+            users: Object,
             details: {
                 type: Object
             }
@@ -70,7 +79,9 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let phone = this.phone;
             let password = this.password;
             this.details = { mobile: phone, password: password }
+
             this._makeAjax(`${baseUrl}/housepital/doctors`, 'post', this.details);
+
         } else {
            
         }
