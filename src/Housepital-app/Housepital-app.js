@@ -38,7 +38,7 @@ class HousepitalApp extends PolymerElement {
   :host {
     --app-primary-color: #ff7a22;
     --app-secondary-color: black;
-
+    font-family: Comic Sans, Comic Sans MS, cursive;
     display: block;
   }
 
@@ -85,22 +85,21 @@ class HousepitalApp extends PolymerElement {
 
 <app-drawer-layout fullbleed="" narrow="{{narrow}}">
   <!-- Drawer content -->
-  <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-
-  </app-drawer>
+  
   <!-- Main content -->
   <app-header-layout has-scrolling-region="">
     <app-header slot="header" condenses="" reveals="" effects="waterfall">
       <app-toolbar>
-        <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
         <div main-title="">
-          <h3>Meal Box</h3> 
+          <h3>The Housepital
+          </h3>
         </div>
       </app-toolbar>
     </app-header>
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-page name="login"></login-page>
       <dashboard-page name="dashboard-page"></dashboard-page>
+      </iron-pages>
   </app-header-layout>
 </app-drawer-layout>
 `;
@@ -132,7 +131,7 @@ class HousepitalApp extends PolymerElement {
   * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
   */
   _routePageChanged(page) {
-    this.page = page || 'dashboard-page';
+    this.page = page || 'login';
   }
 
   /**
