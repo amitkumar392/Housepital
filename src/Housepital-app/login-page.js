@@ -71,6 +71,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let phone = this.phone;
             let password = this.password;
             this.details = { mobile: phone, password: password }
+            this.$.form.reset();
             this._makeAjax(`${baseUrl1}/housepital/doctors`, 'post', this.details);
 
         } else {
