@@ -23,6 +23,7 @@ class UserLogin extends PolymerElement {
     border: 1px solid black;
     background-color:white;
     width: 500px;
+    padding:10px;
     border-radius:20px;
   
   }
@@ -69,7 +70,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
             let phone = this.phone;
             let password = this.password;
             this.details = { mobile: phone, password: password }
-            this._makeAjax(`http://10.117.189.177:9090/forexpay/users`, 'post', this.details);
+            this._makeAjax(`http://10.117.189.37:9090/housepital/doctors`, 'post', this.details);
         } else {
            
         }

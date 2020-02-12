@@ -12,6 +12,9 @@ import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-scroll-effects/app-scroll-effects.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/app-route/app-location.js';
+import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-icons/maps-icons.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
@@ -91,7 +94,7 @@ class HousepitalApp extends PolymerElement {
     <app-header slot="header" condenses="" reveals="" effects="waterfall">
       <app-toolbar>
         <div main-title="">
-          <h3>The Housepital
+          <h3><iron-icon icon="maps:local-hospital"></iron-icon>Housepital
           </h3>
         </div>
       </app-toolbar>
