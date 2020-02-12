@@ -6,7 +6,8 @@
     "src/**/*",
     "manifest/**",
     "wall.jpg",
-    "package.json"
+    "package.json",
+    "config.html"
    ],
    "extraDependencies": [
     "manifest.json",
