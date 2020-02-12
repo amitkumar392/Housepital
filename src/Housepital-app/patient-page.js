@@ -84,8 +84,21 @@ class PatientPage extends PolymerElement {
 
 <paper-dialog id="actions" class="colored">
   <h2>Dialog Title</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div>
+    
+<paper-card heading="" alt="Emmental">
+<div class="card-content">
+  Emmentaler or Emmental is a yellow, medium-hard cheese that originated in the area around Emmental, Switzerland. It is one of the cheeses of Switzerland, and is sometimes known as Swiss cheese.
+</div>
+<div class="card-actions">
+  <paper-button>Share</paper-button>
+  <paper-button>Explore!</paper-button>
+</div>
+</paper-card>
+
+
+  </div>
+  
   <div class="buttons">
     <paper-button>More Info...</paper-button>
     <paper-button dialog-dismiss>Decline</paper-button>
