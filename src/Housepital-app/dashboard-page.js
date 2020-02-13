@@ -39,7 +39,7 @@ return html`
   td {
     text-align: left;
     padding: 15px;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   #tab1 {
@@ -48,12 +48,12 @@ return html`
   }
 
   #tab1 th {
-    background-color: rgb(22, 2, 206);
+    background-color: rgb(102, 102, 102);
     color: white;
   }
 
   #tab1 tr:nth-child(even) {
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(134, 134, 134);
   }
 
   #content {
@@ -62,7 +62,7 @@ return html`
   }
 
   #tab1 tr:nth-child(odd) {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(134, 134, 134);
   }
 
   #data {

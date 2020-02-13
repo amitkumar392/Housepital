@@ -155,16 +155,16 @@ class HousepitalApp extends PolymerElement {
       '_routePageChanged(routeData.page)'
     ];
   }
-  _handleClear(){
+  _handleClear() {
     sessionStorage.clear();
   }
-ready(){
-  super.ready();
-  this.addEventListener('refresh-login',(event)=>{
-    sessionStorage.setItem('login',event.detail.login);
-  })
-}
-  _handleLogout(){
+  ready() {
+    super.ready();
+    this.addEventListener('refresh-login', (event) => {
+      sessionStorage.setItem('login', event.detail.login);
+    })
+  }
+  _handleLogout() {
     sessionStorage.clear();
   }
   /**
@@ -199,7 +199,9 @@ ready(){
       case 'form-page':
         import('./form-page.js');
         break;
-
+      default:
+        import('./patient-page.js');
+        break;
     }
   }
 
