@@ -215,11 +215,7 @@ class HousepitalApp extends PolymerElement {
       case 'patient-page':
         import('./patient-page.js');
         break;
-      case 'form-page':
-        import('./form-page.js');
-        break;
-
-    }
+          }
   }
 
 }
