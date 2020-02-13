@@ -6,7 +6,9 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/app-route/app-location.js';
 import '@polymer/paper-toast/paper-toast.js';
-
+import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-item/paper-item.js';
 /**
 * @customElement
 * @polymer
@@ -21,7 +23,6 @@ class AddSlot extends PolymerElement {
     }
   
     paper-button {
-      float: right;
       background-color: black;
       color: white;
     }
@@ -29,35 +30,48 @@ class AddSlot extends PolymerElement {
     span {
       margin: 10px;
     }
-  
-    paper-card {
-      width: 1000px;
-    }
-  #form{
-    background-color:white;
-    margin-top:50px;
+  form{
+    margin:20px 100px 100px 100px;
+  }
+  #book{
+    margin-bottom: 30px;;
   }
     #data {
       margin: 100px;
     }
+#dashboard{
+  position: absolute;
+    right:0px;
 
+}
+#content {
+    position: relative;
+    background-color: white;
+  }
     a {
       text-decoration: none;
       color: white;
     }
 </style>
-
-<paper-button><a href="[[rootPath]]dashboard-page">Dashboard</a></paper-button>
-<paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
+<div id="content">
 <iron-form id="form">
+<paper-button id="dashboard"><a href="[[rootPath]]dashboard-page">Dashboard</a></paper-button>
   <form>
     <h2> Add Slot</h2>
+    <paper-dropdown-menu label="Location" id="location" >
+      <paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
+      <template is="dom-repeat" items={{location}}>
+      <paper-item>{{item.locationName}}</paper-item>
+      </template>
+      </paper-listbox>
+      </paper-dropdown-menu>
     <paper-input label="Date" id="date" type="date" ></paper-input>
     <paper-input label="From Time" id="fromTime" type="time" value={{fromTime}} ></paper-input>
     <paper-input label="To Time" id="time" type="time" ></paper-input>
-    <paper-button raised id="login" on-click="_handlebook">Book</paper-button>
+    <paper-button raised id="book" on-click="_handlebook">Book</paper-button>
   </form>
 </iron-form>
+</div>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 <paper-toast text="Slot Added" id="slot"></paper-toast>
@@ -66,9 +80,12 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
   }
   static get properties() {
     return {
-      prop1: {
+      location: {
+        type: Array,
+        value: []
+      }, id: {
         type: String,
-        value: 'Forex Transfer'
+        value: null
       },
       userName: {
         type: String,
@@ -80,24 +97,29 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
       data: Array,
     };
   }
-  _handleLogout() {
-    sessionStorage.clear();
-  }
   connectedCallback() {
     super.connectedCallback();
-   
+    this._makeAjax(`${baseUrl1}/housepital/locations`, 'get', null);
+    this.action = 'Location';
   }
 
   _handlebook() {
+    let hospital = this.$.location.value;
+    for (let i = 0; i < this.location.length; i++) {
+      if (hospital == this.location[i].locationName) {
+        this.id = this.location[i].locationId;
+      }
+    }
+
     let obj = {
-      hospitalId: parseInt('1'),
+      hospitalId: parseInt(this.id),
       doctorId: parseInt(sessionStorage.getItem('doctorId')),
       date: parseInt(this.$.date.value),
       fromTime: parseInt(this.fromTime),
       slotToTime: parseInt(this.$.time.value)
     }
-
-    this._makeAjax(`http://10.117.189.177:9090/forexpay/users/${sessionStorage.getItem('doctorId')}/transactions`, 'post', obj)
+    console.log(obj)
+    this._makeAjax(`http://10.117.189.106:9090/forexpay/users/${sessionStorage.getItem('doctorId')}/transactions`, 'post', obj)
   }
   // calling main ajax call method 
   _makeAjax(url, method, postObj) {
@@ -113,7 +135,10 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
       case 'List':
         this.data = event.detail.response;
         this.$.slot.open()
-        this.set('route.path', './dashboard-page')
+       this.$.form.reset();
+        break;
+      case 'Location':
+        this.location = event.detail.response;
         break;
     }
   }

@@ -21,7 +21,6 @@ return html`
   }
 
   paper-button {
-    float: right;
     background-color: black;
     color: white;
   }
@@ -30,41 +29,90 @@ return html`
     margin: 10px;
   }
 
-  paper-card {
-    width: 1000px;
+  table,
+  th,
+  td {
+    border-collapse: collapse;
   }
 
- #data{
-   margin:10px 0px 0px 0px;
- }
-h1{
-  color:black;
+  th,
+  td {
+    text-align: left;
+    padding: 15px;
+    color: white;
+  }
+
+  #tab1 {
+    width: 100%;
+
+  }
+
+  #tab1 th {
+    background-color: rgb(22, 2, 206);
+    color: white;
+  }
+
+  #tab1 tr:nth-child(even) {
+    background-color: rgb(44, 44, 44);
+  }
+
+  #content {
+    position: relative;
+    background-color: white;
+  }
+
+  #tab1 tr:nth-child(odd) {
+    background-color: rgb(0, 0, 0);
+  }
+
+  #data {
+    margin: 10px 0px 0px 0px;
+  
+  }
+
+  h1 {
+    color: black;
+  }
+h2{
+  text-align: center;
 }
+  #addSlot {
+    position: absolute;
+    right:0px;
+  }
+
   a {
     text-decoration: none;
     color: white;
   }
 </style>
- <h1>Welcome, {{name11}}</h1>
-<paper-button><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
-<paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
-
-<h1>Your Appointments</h1>
-<div id="data">
-  <template is="dom-repeat" items={{data}}>
-    <paper-card heading="" alt="Emmental" id="slot">
-      <div class="card-content">
-        <span>Hospital Name : {{item.hospitalName}}</span>
-        <span>Date : {{item.date}}<span>
-        <span>Time : {{item.slotTime}}<span>
-        <span>Name : {{item.patientName}}<span>
-        <span>Email : {{item.email}}<span>
-        <span>Mobile : {{item.mobile}}<span>
-      </div>
-    </paper-card><br>
-  </template>
+<div id="content">
+  <paper-button id="addSlot"><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
+  <h1>Welcome, {{name11}}</h1>
+  <h2>Your Appointments</h2>
+  <div id="data">
+    <table id="tab1">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Hospital Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Mobile</th>
+      </tr>
+      <template is="dom-repeat" items={{data}}>
+        <tr>
+          <td>{{item.patientName}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.hospitalName}}</td>
+          <td>{{item.date}}</td>
+          <td>{{item.slotTime}}</td>
+          <td>{{item.mobile}}</td>
+        </tr>
+      </template>
+    </table>
+  </div>
 </div>
-
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" content-type="application/json"
   on-error="_handleError"></iron-ajax>
 `;
@@ -83,19 +131,17 @@ type: String,
 value: 'List'
 },
 name11:{
-  type:String,
-  value:sessionStorage.getItem('doctorName')
+type:String,
+value:sessionStorage.getItem('doctorName')
 },
 data: Array,
 };
 }
-_handleLogout(){
-  sessionStorage.clear();
-}
+
 connectedCallback() {
 super.connectedCallback();
 let doctorId = sessionStorage.getItem('doctorId')
-this._makeAjax(`http://10.117.189.177:9090/housepital/doctors/${doctorId}/appointments`, 'get', null)
+this._makeAjax(`http://10.117.189.106:9090/housepital/doctors/${doctorId}/appointments`, 'get', null)
 }
 // calling main ajax call method
 _makeAjax(url, method, postObj) {

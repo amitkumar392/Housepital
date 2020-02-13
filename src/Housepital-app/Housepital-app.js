@@ -13,6 +13,7 @@ import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/app-route/app-location.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/polymer/lib/elements/dom-if.js'
 import '@polymer/iron-icons/maps-icons.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/app-route/app-location.js';
@@ -110,10 +111,13 @@ class HousepitalApp extends PolymerElement {
           <h3><iron-icon icon="maps:local-hospital"></iron-icon>Housepital
           </h3>        
         </div>
-        <template is="dom-if" if={{login}}>
+        <template is="dom-if" if={{!login}}>
         <paper-button><a href="[[rootPath]]login">Doctor? Login</a></paper-button>
-        <paper-button><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
-</template>
+        </template>
+        <template is="dom-if" if={{login}}>
+         <paper-button on-click="_handleClear"><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
+         <paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
+        </template>
       </app-toolbar>
     </app-header>
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
@@ -137,7 +141,7 @@ class HousepitalApp extends PolymerElement {
       },
       login: {
         type: Boolean,
-        value: true
+        value: sessionStorage.getItem('login')
       },
       routeData: Object,
       subroute: Object,
@@ -151,7 +155,18 @@ class HousepitalApp extends PolymerElement {
       '_routePageChanged(routeData.page)'
     ];
   }
-
+  _handleClear(){
+    sessionStorage.clear();
+  }
+ready(){
+  super.ready();
+  this.addEventListener('refresh-login',(event)=>{
+    sessionStorage.setItem('login',event.detail.login);
+  })
+}
+  _handleLogout(){
+    sessionStorage.clear();
+  }
   /**
   * Show the corresponding page according to the route.
   * If no page was found in the route data, page will be an empty string.

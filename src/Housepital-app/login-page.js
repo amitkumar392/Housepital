@@ -88,7 +88,7 @@ content-type="application/json" on-error="_handleError"></iron-ajax>
     // getting response from server and storing user name and id in session storage
     _handleResponse(event) {
         this.users = event.detail.response
-        console.log(this.users)
+        this.dispatchEvent(new CustomEvent('refresh-login',{detail:{login:true},bubbles:true,composed:true}))
        sessionStorage.setItem('doctorName',this.users.doctorName);
        sessionStorage.setItem('doctorId',this.users.doctorId);
        sessionStorage.setItem('login',false);
