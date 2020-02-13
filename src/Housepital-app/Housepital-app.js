@@ -115,7 +115,7 @@ class HousepitalApp extends PolymerElement {
         <paper-button><a href="[[rootPath]]login">Doctor? Login</a></paper-button>
         </template>
         <template is="dom-if" if={{login}}>
-         <paper-button on-click="_handleClear"><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
+         <paper-button on-click="_handleLogout"><a href="[[rootPath]]patient-page">For Patient</a></paper-button>
          <paper-button on-click="_handleLogout"><a href="[[rootPath]]login">Logout</a></paper-button>
         </template>
       </app-toolbar>
@@ -125,7 +125,6 @@ class HousepitalApp extends PolymerElement {
       <dashboard-page name="dashboard-page"></dashboard-page>
       <patient-page name="patient-page"></patient-page>
       <add-slot name="add-slot"></add-slot>
-      <form-page name="form-page"></form-page>
       </iron-pages>
   </app-header-layout>
 </app-drawer-layout>
@@ -141,7 +140,9 @@ class HousepitalApp extends PolymerElement {
       },
       login: {
         type: Boolean,
-        value: sessionStorage.getItem('login')
+        value: false,
+        reflectToAttribute: true,
+        observer: '_loginChanged'
       },
       routeData: Object,
       subroute: Object,
@@ -155,17 +156,26 @@ class HousepitalApp extends PolymerElement {
       '_routePageChanged(routeData.page)'
     ];
   }
+  _loginChanged() {
+    console.log("in _loginChanged")
+    this.addEventListener('refresh-login', (event) => {
+      sessionStorage.
+      this.login = event.detail.login;
+    })
+  }
   _handleClear() {
     sessionStorage.clear();
   }
   ready() {
     super.ready();
-    this.addEventListener('refresh-login', (event) => {
-      sessionStorage.setItem('login', event.detail.login);
-    })
+    // this.addEventListener('refresh-login', (event) => {
+    //   console.log("in parent")
+    //   //sessionStorage.setItem('login', event.detail.login);
+    // })
   }
   _handleLogout() {
     sessionStorage.clear();
+    this.login=false;
   }
   /**
   * Show the corresponding page according to the route.
@@ -173,7 +183,16 @@ class HousepitalApp extends PolymerElement {
   * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
   */
   _routePageChanged(page) {
-    this.page = page || 'patient-page';
+    //this.page = page || 'patient-page';
+
+    if (!page) {
+      this.page = 'patient-page';
+    } else if (['login', 'dashboard-page', 'add-slot', 'patient-page'].indexOf(page) !== -1) {
+      this.page = page;
+    } else {
+      this.page = 'patient-page';
+    }
+
   }
 
   /**
@@ -199,9 +218,7 @@ class HousepitalApp extends PolymerElement {
       case 'form-page':
         import('./form-page.js');
         break;
-      default:
-        import('./patient-page.js');
-        break;
+
     }
   }
 

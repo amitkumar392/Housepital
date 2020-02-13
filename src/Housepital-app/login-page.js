@@ -10,8 +10,8 @@ import '@polymer/app-route/app-location.js';
 * @polymer
 */
 class UserLogin extends PolymerElement {
-    static get template() {
-        return html`
+  static get template() {
+    return html`
 <style>
   :host {
     display: block;
@@ -55,53 +55,53 @@ class UserLogin extends PolymerElement {
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 `;
-    }
-    static get properties() {
-        return {
-            users: Object,
-            details: {
-                type: Object
-            },
-            baseUrl:String
-        };
-    }
-    // fetching the  user data from josn file 
-    signIn() {
+  }
+  static get properties() {
+    return {
+      users: Object,
+      details: {
+        type: Object
+      },
+      baseUrl: String
+    };
+  }
+  // fetching the  user data from josn file 
+  signIn() {
 
-        if (this.$.form.validate()) {
-            let phone = this.phone;
-            let password = this.password;
-            this.details = { mobile: phone, password: password }
-            this.$.form.reset();
-            this._makeAjax(`${baseUrl1}/housepital/doctors`, 'post', this.details);
+    if (this.$.form.validate()) {
+      let phone = this.phone;
+      let password = this.password;
+      this.details = { mobile: phone, password: password }
+      this.$.form.reset();
+      this._makeAjax(`${baseUrl1}/housepital/doctors`, 'post', this.details);
 
-        } else {
-           
-        }
-    }
+    } else {
 
-    // handling error if encounter error from backend server
-    _handleError() {
-        
     }
+  }
 
-    // getting response from server and storing user name and id in session storage
-    _handleResponse(event) {
-        this.users = event.detail.response
-        this.dispatchEvent(new CustomEvent('refresh-login',{detail:{login:true},bubbles:true,composed:true}))
-       sessionStorage.setItem('doctorName',this.users.doctorName);
-       sessionStorage.setItem('doctorId',this.users.doctorId);
-       sessionStorage.setItem('login',false);
-       this.set('route.path','./dashboard-page')
-    }
-      // calling main ajax call method 
-    _makeAjax(url, method, postObj) {
-        let ajax = this.$.ajax;
-        ajax.method = method;
-        ajax.url = url;
-        ajax.body = postObj ? JSON.stringify(postObj) : undefined;
-        ajax.generateRequest();
-    }
+  // handling error if encounter error from backend server
+  _handleError() {
+
+  }
+
+  // getting response from server and storing user name and id in session storage
+  _handleResponse(event) {
+    this.users = event.detail.response
+    this.dispatchEvent(new CustomEvent('refresh-login', { detail: { login: true }, bubbles: true, composed: true }))
+    sessionStorage.setItem('doctorName', this.users.doctorName);
+    sessionStorage.setItem('doctorId', this.users.doctorId);
+    sessionStorage.setItem('login', true);
+    this.set('route.path', './dashboard-page')
+  }
+  // calling main ajax call method 
+  _makeAjax(url, method, postObj) {
+    let ajax = this.$.ajax;
+    ajax.method = method;
+    ajax.url = url;
+    ajax.body = postObj ? JSON.stringify(postObj) : undefined;
+    ajax.generateRequest();
+  }
 
 }
 
