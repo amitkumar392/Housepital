@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/18</span>
+                <span class='fraction'>4/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/18</span>
+                <span class='fraction'>4/20</span>
             </div>
         
             
@@ -161,7 +161,8 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -230,11 +231,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -249,6 +250,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -333,14 +335,14 @@ content-type="application/json" on-error="_handleError"&gt;&lt;/iron-ajax&gt;
         };
     }
     // fetching the  user data from josn file 
-<span class="fstat-no" title="function not covered" >    si</span>gnIn() {
+    signIn() {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (this.$.form.validate()) {</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (this.$.form.validate()) {
             let phone = <span class="cstat-no" title="statement not covered" >this.phone;</span>
             let password = <span class="cstat-no" title="statement not covered" >this.password;</span>
 <span class="cstat-no" title="statement not covered" >            this.details = { mobile: phone, password: password }</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            this._makeAjax(`${this.baseUrl}/housepital/doctors`, 'post', this.details);</span>
+<span class="cstat-no" title="statement not covered" >            this.$.form.reset();</span>
+<span class="cstat-no" title="statement not covered" >            this._makeAjax(`${baseUrl1}/housepital/doctors`, 'post', this.details);</span>
 &nbsp;
         } else {
            
@@ -355,6 +357,7 @@ content-type="application/json" on-error="_handleError"&gt;&lt;/iron-ajax&gt;
     // getting response from server and storing user name and id in session storage
 <span class="fstat-no" title="function not covered" >    _h</span>andleResponse(event) {
 <span class="cstat-no" title="statement not covered" >        this.users = event.detail.response</span>
+<span class="cstat-no" title="statement not covered" >        console.log(this.users)</span>
 <span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('doctorName',this.users.doctorName);</span>
 <span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('doctorId',this.users.doctorId);</span>
 <span class="cstat-no" title="statement not covered" >       sessionStorage.setItem('login',false);</span>
@@ -378,7 +381,7 @@ window.customElements.define('login-page', UserLogin);</pre></td></tr></table></
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Feb 12 2020 19:54:51 GMT+0530 (India Standard Time)
+                at Thu Feb 13 2020 17:52:44 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

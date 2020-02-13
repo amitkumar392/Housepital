@@ -5,39 +5,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>user-app-app test</title>
-  
+    <title>app form test</title>
 
     <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script src="../../node_modules/chai/chai.js"></script>
-    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
     <script src="../../node_modules/sinon/pkg/sinon.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
 
-    <script type="module" src="../../src/Housepital-app/login-page.js"></script>
+    <script type="module" src="../../src/Housepital-app/patient-page.js"></script>
 </head>
 
 <body>
 
-    <test-fixture id="loginPageFixture">
+    <test-fixture id="AppForm">
         <template>
-            <login-page></login-page>
+            <patient-page></patient-page>
         </template>
     </test-fixture>
 
-
-
     <script>
-       describe('Given Login Page Component:', function () {
+
+        describe('Given User-List Component:', function () {
             var element;
             var elementShadowRoot;
 
             describe('When component is initailised', function () {
 
                 beforeEach(function () {
-                    element = fixture('loginPageFixture');
-                    debugger;
+                    element = fixture('AppForm');
                     elementShadowRoot = element.shadowRoot;
                 });
 
@@ -47,45 +44,45 @@
                 });
 
                 it('should render iron-form component', function () {
-                    let ironForm = elementShadowRoot.querySelector('iron-form');
+                    let ironForm = elementShadowRoot.querySelector('#addUserForm')
                     expect(ironForm).to.be.exist;
-                    // expect(ironForm).to.not.null;
+                    expect(ironForm).to.not.null;
                 });
 
-                it('should render mobile field', function () {
-                    let mobile = elementShadowRoot.querySelector('#phone')
-                    expect(mobile).to.be.exist;
-                    // expect(mobile).to.not.null;
+                it('should render name field', function () {
+                    let name = elementShadowRoot.querySelector('#name')
+                    expect(name).to.be.exist;
+                    expect(name).to.not.null;
                 });
 
-                it('should render password field', function () {
-                    let password = elementShadowRoot.querySelector('#pass')
-                    expect(password).to.be.exist;
-                    // expect(password).to.not.null;
-                    // expect(password.getAttribute('password')).to.be.equal('password');
+                it('should render sapId field', function () {
+                    let sapId = elementShadowRoot.querySelector('#sapId')
+                    expect(sapId).to.be.exist;
+                    expect(sapId).to.not.null;
+                    expect(sapId.getAttribute('name')).to.be.equal('sapId')
                 });
 
-                it('should render login button', function () {
-                    let paperloginBtn = elementShadowRoot.querySelector('#login')
-                    expect(paperloginBtn).to.be.exist;
-                    // expect(paperloginBtn).to.not.null;
-                    expect(paperloginBtn.innerHTML).to.be.equal('LOGIN');
+                it('should render Submit button', function () {
+                    let paperSubmitBtn = elementShadowRoot.querySelector('paper-button')
+                    expect(paperSubmitBtn).to.be.exist;
+                    expect(paperSubmitBtn).to.not.null;
+                    expect(paperSubmitBtn.innerHTML).to.be.equal('Add User');
                 });
 
                 it('should render iron-ajax component', function () {
                     let ironAjax = elementShadowRoot.querySelector('iron-ajax')
                     expect(ironAjax).to.be.exist;
-                    // expect(ironAjax).to.not.null;
+                    expect(ironAjax).to.not.null;
                 });
 
-                // it('should have phonenumber and password properties', function () {
-                //     expect(element.mobile).to.be.equal('');
-                //     expect(element.password).to.be.equal('');
-                //     // expect(element.userList.length).to.be.equal(0);
-                // });
+                it('should have name,sapId and userList props', function () {
+                    expect(element.name).to.be.equal('');
+                    expect(element.sapId).to.be.equal('');
+                    expect(element.userList.length).to.be.equal(0);
+                });
 
-                describe('AND When login button is clicked', function () {
-                    let loginSpy, loginStub;
+                describe('AND When submit button is clicked', function () {
+                    let submitSpy, submitStub;
                     var ajax;
                     var request;
                     var server;
@@ -94,7 +91,7 @@
                     };
 
                     beforeEach(function () {
-                        loginStub = sinon.spy();
+                        submitStub = sinon.spy();
                         server = sinon.fakeServer.create();
 
                     });
@@ -103,21 +100,21 @@
                         server.restore();
                     })
 
-                    it('should call loginStub()', function (done) {
-                        let btn = elementShadowRoot.querySelector('#login');
-                        btn.addEventListener('click', loginStub);
-                        element.mobile = 1234567890;
-                        element.password = "ram@ram";
-                        // element.action = 'list';
+                    it('should call submitStub()', function (done) {
+                        let btn = elementShadowRoot.querySelector('paper-button');
+                        btn.addEventListener('click', submitStub);
+                        element.name = "Radha";
+                        element.sapId = 12345;
+                        element.action = 'list';
                         
                         flush(function () {
                             btn.click();
-                            expect(loginStub.callCount).to.be.equal(1);
+                            expect(submitStub.callCount).to.be.equal(1);
                             done();
                         });
                     });
 
-                    it.skip('should respond with correct response', function (done) {
+                    it('should respond with correct response', function (done) {
                         ajax = elementShadowRoot.querySelector("iron-ajax");
 
                         request = ajax.generateRequest();
@@ -131,15 +128,15 @@
                         );
                         flush(function () {
                             console.log(request);
-                            // debugger;
-                            expect(request.response).to.be.ok;
-                            expect(request.response).to.be.equal('object');
+                            debugger;
+                            // expect(request.response).to.be.ok;
+                            // expect(request.response).to.be.equal('object');
 
                             server.respond();
                             done();
                         });
 
-                        expect(request.response.success).to.be.equal(true);
+                        // expect(request.response.success).to.be.equal(true);
 
 
                     });
