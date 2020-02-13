@@ -3,162 +3,171 @@ import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-form/iron-form.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-card/paper-card.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/app-route/app-location.js';
-import '@polymer/paper-card/paper-card.js';
-
+import '@polymer/polymer/lib/elements/dom-repeat';
 /**
 * @customElement
 * @polymer
 */
 class Dashboard extends PolymerElement {
-  static get template() {
-    return html`
+static get template() {
+return html`
 <style>
   :host {
-    display: block; 
+    display: block;
+    font-family: Comic Sans, Comic Sans MS, cursive;
+  }
+
+  paper-button {
+    background-color: black;
+    color: white;
+  }
+
+  span {
+    margin: 10px;
+  }
+
+  table,
+  th,
+  td {
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 15px;
+    color: rgb(255, 255, 255);
+  }
+
+  #tab1 {
+    width: 100%;
 
   }
-  paper-button{
-    float:right;
-    background-color:black;
-    color:white;
+
+  #tab1 th {
+    background-color: rgb(102, 102, 102);
+    color: white;
   }
-  #buttons{
 
+  #tab1 tr:nth-child(even) {
+    background-color: rgb(134, 134, 134);
   }
-a{
-  text-decoration:none;
-  color:white;
-}
-#profile{
-  width:100%;
-}
-</style>
 
-<div id="buttons">
-<paper-button><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
-<paper-button><a href="[[rootPath]]login">Logout</a></paper-button>
-</div>
+  #content {
+    position: relative;
+    background-color: white;
+  }
 
-<div>
+  #tab1 tr:nth-child(odd) {
+    background-color: rgb(134, 134, 134);
+  }
 
-
-
-<paper-card heading=""  alt="" id="profile">
-  <div class="card-content">
-  <img src="profileDoctor.imageUrl" alt="Doctor face" height="42" width="42">
-    <p>Doctor ID:{{profileDoctor.doctorId}}</p>
-    <p>Doctor Name:{{profileDoctor.doctorName}}</p>
-    <p>Experience: {{profileDoctor.experience}}</p>
-    <p>Rating: {{profileDoctor.rating}}</p>
-    <p> Mobile Number: {{profileDoctor.phoneNumber}}</p>
- 
-  </div>
+  #data {
+    margin: 10px 0px 0px 0px;
   
-</paper-card>
+  }
 
+  h1 {
+    color: black;
+  }
+h2{
+  text-align: center;
+}
+  #addSlot {
+    position: absolute;
+    right:0px;
+  }
 
+  a {
+    text-decoration: none;
+    color: white;
+  }
+</style>
+<div id="content">
+  <paper-button id="addSlot"><a href="[[rootPath]]add-slot">Add Slot</a></paper-button>
+  <h1>Welcome, {{name11}}</h1>
+  <h2>Your Appointments</h2>
+  <div id="data">
+    <table id="tab1">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Hospital Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Mobile</th>
+      </tr>
+      <template is="dom-repeat" items={{data}}>
+        <tr>
+          <td>{{item.patientName}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.hospitalName}}</td>
+          <td>{{item.date}}</td>
+          <td>{{item.slotTime}}</td>
+          <td>{{item.mobile}}</td>
+        </tr>
+      </template>
+    </table>
+  </div>
 </div>
-
-
-<h2>Booked Slot </h2>
-<template is="dom-repeat" items={{getSlot}}>
-<paper-card heading=""  alt="">
-  <div class="card-content">
-    <p>Hospital Name:{{item.hospitalName}}</p>
-    <p>Appointment Date :{{item.date}}</p>
-    <p>Patient ID: {{item.patientId}}</p>
-    <p>Patient Name: {{item.patientName}}</p>
-    <p> Email: {{item.email}}</p>
-    <p>Mobile Number: {{item.mobile}}</p>
-    <p> Slot Time: {{item.slotTime}}</p> 
-  </div>
-  <div class="card-actions">
-    <paper-button>Share</paper-button>
-    <paper-button>Explore!</paper-button>
-  </div>
-</paper-card>
-</template>
-
-
-
-
-
-
-
-
-<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
-content-type="application/json" on-error="_handleError"></iron-ajax>
+<iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" content-type="application/json"
+  on-error="_handleError"></iron-ajax>
 `;
- }
-  static get properties() {
-    return {
-      prop1: {
-        type: String,
-        value: 'Forex Transfer'
-      },
-      userName: {
-        type: String,
-        value: sessionStorage.getItem('userName')
-      },
-       action: {
-        type: String,
-        value: 'List'
-      },
-      data: Array,
-
-      getSlot: {
-        type: Array,
-        value: []
-      },
-
-      profileDoctor:{
-        type:Array
-      }
-    };
-  }
-  connectedCallback() {
-    super.connectedCallback();
-    // let userId = sessionStorage.getItem('userId');
-    // this.userName = sessionStorage.getItem('userName');
-    this._makeAjax(`${this.baseURI}/housepital/doctors/{doctorId}/appointments`, 'get', null)
-  }
-  // calling main ajax call method 
-  _makeAjax(url, method, postObj) {
-    let ajax = this.$.ajax;
-    ajax.method = method;
-    ajax.url = url;
-    ajax.body = postObj ? JSON.stringify(postObj) : undefined;
-    ajax.generateRequest();
-  }
-  // _handleTransfer(){
-
-  // }
-  _handleResponse(event) {
-   
-    console.log(this.getSlot)
-  } 
-  _handleResponse(event) {
-    switch (this.action) {
-        case 'Data':
-            this.profileDoctor = event.detail.response;
-            console.log(this.doctors)
-        case 'List':
-          this.getSlot = event.detail.response;
-          this._makeAjax(`${this.baseURI}/housepital/doctors/{doctorId}`, 'get', null)
-          this.action='Data'
-            break;
-    }
+}
+static get properties() {
+return {
+prop1: {
+type: String,
+value: 'Forex Transfer'
+},
+userName: {
+type: String,
+value: sessionStorage.getItem('userName')
+}, action: {
+type: String,
+value: 'List'
+},
+name11:{
+type:String,
+value:sessionStorage.getItem('doctorName')
+},
+data: Array,
+};
 }
 
-    // ready(){
-    //   super.ready();
-    //   let name =sessionStorage.getItem('userName');
-    //   if(name === null) {
-    //     this.set('route.path', './login-page')
-    //   }
-    // }
+connectedCallback() {
+super.connectedCallback();
+let doctorId = sessionStorage.getItem('doctorId')
+this._makeAjax(`http://10.117.189.106:9090/housepital/doctors/${doctorId}/appointments`, 'get', null)
+}
+// calling main ajax call method
+_makeAjax(url, method, postObj) {
+let ajax = this.$.ajax;
+ajax.method = method;
+ajax.url = url;
+ajax.body = postObj ? JSON.stringify(postObj) : undefined;
+ajax.generateRequest();
+}
+_handleTransfer() {
+this.set('route.path', './fund-transfer')
+}
+_handleResponse(event) {
+switch (this.action) {
+case 'List':
+this.data = event.detail.response;
+break;
+}
+}
+ready() {
+super.ready();
+let name = sessionStorage.getItem('userName');
+if (name === null) {
+this.set('route.path', './login-page')
+}
+}
 
 }
 
