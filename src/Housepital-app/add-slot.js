@@ -36,12 +36,14 @@ class AddSlot extends PolymerElement {
   #book{
     margin-bottom: 30px;;
   }
+
     #data {
       margin: 100px;
     }
 #dashboard{
   position: absolute;
     right:0px;
+
 
 }
 #content {
@@ -58,6 +60,7 @@ class AddSlot extends PolymerElement {
 <paper-button id="dashboard"><a href="[[rootPath]]dashboard-page">Dashboard</a></paper-button>
   <form>
     <h2> Add Slot</h2>
+
     <paper-dropdown-menu label="Location" id="location" >
       <paper-listbox slot="dropdown-content" class="dropdown-content" selected="0">
       <template is="dom-repeat" items={{location}}>
@@ -75,6 +78,7 @@ class AddSlot extends PolymerElement {
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" 
 content-type="application/json" on-error="_handleError"></iron-ajax>
 <paper-toast text="Slot Added" id="slot"></paper-toast>
+
 
 `;
   }
